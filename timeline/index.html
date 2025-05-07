@@ -24,6 +24,7 @@
             data.addColumn('number', 'Percent Complete');
             data.addColumn('string', 'Dependencies');
             
+            
             data.sort([{column: 2}]);
       
               const url = "../data/20250502_roadmap.json";
@@ -34,21 +35,48 @@
               }
       
               const roadmap_json = await response.json();
-              //console.log(roadmap_json);
               for(let i = 0; i < roadmap_json.length; i++) {
                 
-                  console.log(roadmap_json[i].sid + " "+roadmap_json[i].name+ " "+roadmap_json[i].start_date+ " "+roadmap_json[i].end_date);
+                  //console.log(roadmap_json[i].sid + " "+roadmap_json[i].name+ " "+roadmap_json[i].start_date+ " "+roadmap_json[i].end_date);
       
+                  percentDone = 0;
+                  if (roadmap_json[i].state_name=='Requirements'){
+                    percentDone = 10;
+
+                  }
+                  else if(roadmap_json[i].state_name=='Concept'){
+                    percentDone = 20;
+                  }
+                  else if(roadmap_json[i].state_name=='Outreach'){
+                    percentDone = 30;
+                  }                  
+                  else if(roadmap_json[i].state_name=='Development by SWG'){
+                    percentDone = 40;
+                  }
+                  else if(roadmap_json[i].state_name=='OAB & OGC-NA Review'){
+                    percentDone = 70;
+                  }
+                  else if(roadmap_json[i].state_name=='Public Review'){
+                    percentDone = 80;
+                  }
+                  else if(roadmap_json[i].state_name=='TC & PC Votes'){
+                    percentDone = 90;
+                  }
+                  else if(roadmap_json[i].state_name=='Released & Launched'){
+                    percentDone = 100;
+                  }                                                                        
+
                   data.addRow(
-                      [roadmap_json[i].sid, roadmap_json[i].name, 'spring',
-                      new Date(Date.parse(roadmap_json[i].start_date+ "T00:00:00Z")), new Date(Date.parse(roadmap_json[i].end_date+ "T00:00:00Z")), null, 100, null]);
+                      [roadmap_json[i].sid, roadmap_json[i].name, roadmap_json[i].state_name,
+                      new Date(Date.parse(roadmap_json[i].start_date+ "T00:00:00Z")), new Date(Date.parse(roadmap_json[i].end_date+ "T00:00:00Z")), null, percentDone, null]);
               }
           } catch (error) {
               console.error(error.message);
           }
       
       
-            var options = {
+            var options = {  
+              tooltip: {isHtml: true},   
               height: 1500,
               width: 2000,
               gantt: {
@@ -62,6 +90,8 @@
           
       
             chart.draw(data, options);
+
+
           }
         </script>
         
@@ -69,6 +99,7 @@
     <body>
         <h1 style="font-family:verdana">Standards Roadmap</h1>
       <h2 style="font-family:verdana">Timeline View</h2>
+      Percentage done at each lifecycle stage: Requirements (10%), Concept (20%), Outreach (30%), Development by SWG (40%), OAB & OGC-NA Review (70%), Public Review (80%), TC & PC Votes (90%), Released & Launched (100%)
       <div id="chart_div"></div>
       Based on the example at https://developers.google.com/chart/interactive/docs/gallery/ganttchart
     </body>
