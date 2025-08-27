@@ -209,11 +209,11 @@
     {
         "sid": "25269141",
         "name": "OGC API - Environmental Data Retrieval - Part 1: Core v1.2.0",
-        "state_name": "Development by SWG",
+        "state_name": "OAB & OGC-NA Review",
         "parent_id": "13241258",
         "parent_name": "OGC API - Environmental Data Retrieval",
         "start_date": "2023-06-01",
-        "end_date": "2024-12-31"
+        "end_date": "2025-02-18"
     },
     {
         "sid": "25269164",
@@ -223,6 +223,15 @@
         "parent_name": "OGC API - Environmental Data Retrieval",
         "start_date": "2023-02-01",
         "end_date": "2024-07-31"
+    },
+        {
+        "sid": "25269???",
+        "name": "OGC API - Environmental Data Retrieval - Part 3: Service Profile Support v1.0.0",
+        "state_name": "OAB & OGC-NA Review",
+        "parent_id": "13241258",
+        "parent_name": "OGC API - Environmental Data Retrieval",
+        "start_date": "2025-05-08",
+        "end_date": "2025-09-16"
     },
     {
         "sid": "13241404",
